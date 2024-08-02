@@ -1,0 +1,125 @@
+JAVASCRIPT OBJECTS:
+
+Definition:An object in JavaScript is a collection of properties. Each property is a key-value pair 
+where the key (also called a property name) is a string (or Symbol) and the value can be any data type,
+including another object or a function.
+
+Objects can be created in several ways:
+
+1.Object Literal:
+
+
+        const person = {
+            name: 'John',
+            age: 30,
+            greet: function() {
+                console.log('Hello!');
+            }
+        };
+
+2.Using the new Object() Syntax:
+
+        const person = new Object();
+        person.name = 'John';
+        person.age = 30;
+        person.greet = function() {
+            console.log('Hello!');
+        };
+
+3.Using a Constructor Function:
+
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        const person = new Person('John', 30);
+
+4.Using the Object.create() Method:
+
+
+        const proto = {
+            greet: function() {
+                console.log('Hello!');
+            }
+        };
+        const person = Object.create(proto);
+        person.name = 'John';
+        person.age = 30;
+
+INTERNAL REPRESENTATION OF OBJECTS:
+
+In JavaScript, objects are internally represented as hash tables, also known as hash maps or dictionaries.
+Here’s how they are represented and managed internally:
+
+1.Properties and Values:
+
+Keys:  JavaScript object keys are converted to strings (or Symbols). Even if you use other data types as keys,
+       they are coerced into strings.
+Values:Values associated with keys can be of any data type: primitives (number, string, boolean, etc.), 
+       objects, functions, etc.
+
+2.Prototype Chain:
+
+Every JavaScript object has a prototype object from which it can inherit properties and methods. 
+This is known as the prototype chain. You can access the prototype of an object using Object.
+getPrototypeOf(obj) and modify it using Object.setPrototypeOf(obj, proto).
+
+3.Internal Structure:
+
+Internally, objects are optimized by JavaScript engines (like V8 in Chrome and Node.js). The exact 
+structure can vary, but typically objects are implemented using hash tables or similar structures 
+to allow efficient key-value lookups.
+JavaScript engines use different optimizations for objects, such as hidden classes or inline caches,
+to make property access and mutation faster.
+
+4.Property Descriptors:
+
+Each property has attributes (or descriptors) that control its behavior. These include:
+value:        The value of the property.
+writable:     Whether the property value can be changed.
+enumerable:   Whether the property is listed in for...in loops and Object.keys().
+configurable: Whether the property can be deleted or its attributes can be changed.
+              You can interact with property descriptors using Object.defineProperty() and Object.getOwnPropertyDescriptor().
+
+5.Property Iteration:
+
+You can iterate over an object's properties using for...in loops or methods like Object.keys(), 
+Object.values(), and Object.entries().
+
+
+        const person = {
+            name: 'John',
+            age: 30,
+            greet() {
+                console.log('Hello!');
+            }
+        };
+
+// Accessing properties
+        console.log(person.name); // John
+        console.log(person['age']); // 30
+
+// Modifying properties
+        person.age = 31;
+
+// Adding new properties
+        person.country = 'USA';
+
+// Deleting properties
+        delete person.country;
+
+// Iterating over properties
+        for (let key in person) {
+            if (person.hasOwnProperty(key)) {
+                console.log(key + ': ' + person[key]);
+            }
+        }
+
+// Property descriptors
+        const descriptor = Object.getOwnPropertyDescriptor(person, 'name');
+        console.log(descriptor); // { value: 'John', writable: true, enumerable: true, configurable: true }
+
+CONCLUSION:
+JavaScript objects are a versatile and powerful feature, with internal representation optimized by modern 
+JavaScript engines to manage key-value pairs efficiently. Understanding their structure and behavior is
+essential for effective JavaScript programming.
